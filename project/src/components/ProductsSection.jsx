@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 import productImage1 from '../assets/product-1.svg';
 import productImage2 from '../assets/product-2.svg';
 import productImage3 from '../assets/product-3.svg';
+import { useNavigate } from "react-router-dom";
+ 
 
 const ProductsSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="products" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,45 +18,46 @@ const ProductsSection = () => {
           </p>
         </div>
         
-        {/* pose correction section */}
+        {/* workout planner section (replaces pose correction) */}
         <div className="flex flex-col md:flex-row items-center mb-20">
           <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Correct Your Pose</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Workout Planner</h3>
             <p className="text-lg text-gray-600 mb-6">
-              Our AI-powered posture correction tool analyzes your movements in real-time and provides instant feedback to improve your form during workouts.
+              Browse curated workout plans (Chest, Legs, Shoulders, Back, Arms, Full Body) or create your own custom workout to match your goals.
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-[#E7473C] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Real-time posture analysis</span>
+                <span>Pre-built plans for major muscle groups</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-[#E7473C] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Injury prevention guidance</span>
+                <span>Create and save custom workouts</span>
               </li>
               <li className="flex items-start">
                 <svg className="h-6 w-6 text-[#E7473C] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Performance tracking over time</span>
+                <span>Start a workout with a single tap</span>
               </li>
             </ul>
-            <button className="bg-[#E7473C] hover:bg-red-600 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300">
+            <button className="bg-[#E7473C] hover:bg-red-600 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300"
+            onClick={() => navigate("/workout-planner")}>
               Try It Now
             </button>
           </div>
           <div className="md:w-1/2">
             <img 
               src={productImage1} 
-              alt="AI Posture Correction" 
+              alt="Workout Planner" 
               className="rounded-lg shadow-xl"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = 'https://via.placeholder.com/600x400?text=Posture+Correction';
+                e.target.src = 'https://via.placeholder.com/600x400?text=Workout+Planner';
               }}
             />
           </div>
@@ -102,12 +107,12 @@ const ProductsSection = () => {
           </div>
         </div>
         
-        {/* meal planner and workout planner section */}
+        {/* meal planner section */}
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-8 md:mb-0 md:pr-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Meal Planner and Workout Planner</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Meal Planner</h3>
             <p className="text-lg text-gray-600 mb-6">
-              Generate personalized meal and workout plans based on your goals, preferences, and schedule for maximum results.
+              Generate personalized meal plans based on your goals and dietary preference.
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-start">
@@ -129,7 +134,10 @@ const ProductsSection = () => {
                 <span>Grocery lists and meal prep guides</span>
               </li>
             </ul>
-            <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300">
+            <button
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300"
+              onClick={() => navigate('/meal-planner')}
+            >
               Create Your Plan
             </button>
           </div>

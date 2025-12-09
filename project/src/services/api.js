@@ -62,4 +62,15 @@ export const getUserBookings = async (email) => {
   }
 };
 
+export const createMealPlan = async (payload) => {
+  try {
+    // payload: { goal, dietType, weightKg, heightCm, activityLevel, userEmail, saveToProfile }
+    const response = await api.post('/meal-plan', payload);
+    return response.data;
+  } catch (error) {
+    console.error('Error creating meal plan:', error?.response?.data || error.message || error);
+    throw error;
+  }
+};
+
 export default api;

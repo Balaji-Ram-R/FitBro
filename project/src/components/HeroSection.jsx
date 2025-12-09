@@ -1,10 +1,19 @@
+import { useUser, SignInButton } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 // Use a data URL for the hero image to avoid loading issues
 const heroImageData = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+CiAgPHJlY3QgeD0iNTAiIHk9IjUwIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgcng9IjEwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNkZGQiIHN0cm9rZS13aWR0aD0iMiIvPgogIAogIDwhLS0gQXBwIFVJIGVsZW1lbnRzIC0tPgogIDxyZWN0IHg9IjcwIiB5PSI4MCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSI2MCIgcng9IjUiIGZpbGw9IiNmOGY4ZjgiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMTAiIHI9IjE1IiBmaWxsPSIjMTc4NTgyIi8+CiAgPHJlY3QgeD0iMTMwIiB5PSIxMDAiIHdpZHRoPSIxNTAiIGhlaWdodD0iMTAiIHJ4PSIyIiBmaWxsPSIjMzMzIi8+CiAgPHJlY3QgeD0iMTMwIiB5PSIxMjAiIHdpZHRoPSIxMDAiIGhlaWdodD0iOCIgcng9IjIiIGZpbGw9IiM3NzciLz4KICAKICA8cmVjdCB4PSI3MCIgeT0iMTYwIiB3aWR0aD0iMjIwIiBoZWlnaHQ9IjE3MCIgcng9IjUiIGZpbGw9IiNmOGY4ZjgiLz4KICA8cmVjdCB4PSIzMTAiIHk9IjE2MCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIxNzAiIHJ4PSI1IiBmaWxsPSIjZjhmOGY4Ii8+CiAgCiAgPCEtLSBGaXRuZXNzIGdyYXBoIC0tPgogIDxwb2x5bGluZSBwb2ludHM9IjkwLDI4MCAxMzAsMjQwIDE3MCwyNjAgMjEwLDIwMCAyNTAsMjIwIiBzdHJva2U9IiNFNzQ3M0MiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgogIDxjaXJjbGUgY3g9IjkwIiBjeT0iMjgwIiByPSI0IiBmaWxsPSIjRTc0NzNDIi8+CiAgPGNpcmNsZSBjeD0iMTMwIiBjeT0iMjQwIiByPSI0IiBmaWxsPSIjRTc0NzNDIi8+CiAgPGNpcmNsZSBjeD0iMTcwIiBjeT0iMjYwIiByPSI0IiBmaWxsPSIjRTc0NzNDIi8+CiAgPGNpcmNsZSBjeD0iMjEwIiBjeT0iMjAwIiByPSI0IiBmaWxsPSIjRTc0NzNDIi8+CiAgPGNpcmNsZSBjeD0iMjUwIiBjeT0iMjIwIiByPSI0IiBmaWxsPSIjRTc0NzNDIi8+CiAgCiAgPCEtLSBXb3Jrb3V0IGljb25zIC0tPgogIDxjaXJjbGUgY3g9IjM0MCIgY3k9IjIwMCIgcj0iMjAiIGZpbGw9IiMxNzg1ODIiLz4KICA8Y2lyY2xlIGN4PSIzOTAiIGN5PSIyMDAiIHI9IjIwIiBmaWxsPSIjRTc0NzNDIi8+CiAgPGNpcmNsZSBjeD0iNDQwIiBjeT0iMjAwIiByPSIyMCIgZmlsbD0iIzE3ODU4MiIvPgogIDxjaXJjbGUgY3g9IjQ5MCIgY3k9IjIwMCIgcj0iMjAiIGZpbGw9IiNFNzQ3M0MiLz4KICAKICA8cmVjdCB4PSIzMzAiIHk9IjI0MCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9IiMzMzMiLz4KICA8cmVjdCB4PSIzMzAiIHk9IjI2MCIgd2lkdGg9IjE0MCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9IiMzMzMiLz4KICA8cmVjdCB4PSIzMzAiIHk9IjI4MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMCIgcng9IjIiIGZpbGw9IiMzMzMiLz4KICAKICA8IS0tIEZpdEJybyBsb2dvIC0tPgogIDx0ZXh0IHg9IjMwMCIgeT0iNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxNzg1ODIiPkZpdEJybzwvdGV4dD4KPC9zdmc+';
 
 // Use the data URL directly to avoid any loading issues
 const heroImage = heroImageData;
 
+// Define a fallback image data URL (simple gray SVG)
+const fallbackImageData = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlMmUyZTIiLz48dGV4dCB4PSIyMDAiIHk9IjIwMCIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzY2NiI+SW1hZ2UgTm90IEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=';
+
 const HeroSection = () => {
+
+  const { isSignedIn } = useUser();
+  const navigate = useNavigate();
+
   return (
     <section id="home" className="pt-24 pb-12 bg-gradient-to-br from-white to-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,11 +26,18 @@ const HeroSection = () => {
               Innovative tools to transform your workouts, nutrition, and posture.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-[#E7473C] hover:bg-red-600 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300">
+              <button
+                className="bg-[#E7473C] hover:bg-red-600 text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300"
+                onClick={() => {
+                    if (isSignedIn){
+                      const el = document.getElementById('products');
+                    if (el) {
+                      el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
+              >
                 Try Now
-              </button>
-              <button className="border-2 border-[#178582] text-[#178582] hover:bg-[#178582] hover:text-white px-6 py-3 rounded-md text-lg font-medium transition duration-300">
-                Learn More
               </button>
             </div>
           </div>

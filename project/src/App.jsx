@@ -6,6 +6,10 @@ import FallbackPage from './components/FallbackPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import FitnessPlannerPage from './pages/FitnessPlannerPage';
+import WorkoutPlannerPage from './pages/WorkoutPlannerPage';
+import WorkoutSessionPage from './pages/WorkoutSessionPage';
+import MealPlannerPage from './pages/MealPlannerPage';
+import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 // Lazy load components
 const HeroSection = lazy(() => import('./components/HeroSection'));
@@ -55,16 +59,62 @@ export default function App() {
                 </Suspense>
               } />
               <Route path="/booking/:trainerId" element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <BookingPage />
-                </Suspense>
+                <SignedIn>
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <BookingPage />
+                  </Suspense>
+                </SignedIn>
+              } />
+              <Route path="/booking/:trainerId" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
               } />
               <Route path="/video-call/:sessionId" element={
                 <Suspense fallback={<LoadingSpinner />}>
                   <VideoCallPage />
                 </Suspense>
               } />
-              <Route path="/fitness-planner" element={<FitnessPlannerPage />} />
+              <Route path="/fitness-planner" element={
+                <SignedIn>
+                  <FitnessPlannerPage />
+                </SignedIn>
+              } />
+              <Route path="/fitness-planner" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              } />
+              <Route path="/workout-planner" element={
+                <SignedIn>
+                  <WorkoutPlannerPage />
+                </SignedIn>
+              } />
+              <Route path="/workout-planner" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              } />
+              <Route path="/meal-planner" element={
+                <SignedIn>
+                  <MealPlannerPage />
+                </SignedIn>
+              } />
+              <Route path="/meal-planner" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              } />
+              <Route path="/workout-session/:planId" element={
+                <SignedIn>
+                  <WorkoutSessionPage />
+                </SignedIn>
+              } />
+              <Route path="/workout-session/:planId" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              } />
               <Route path="*" element={<FallbackPage />} />
             </Routes>
           </Suspense>

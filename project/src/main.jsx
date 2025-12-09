@@ -4,22 +4,26 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import ErrorBoundary from './components/ErrorBoundary'
+import { ClerkProvider } from "@clerk/clerk-react";
 
-// Make sure the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const rootElement = document.getElementById('root');
+const PUBLISHABLE_KEY = "pk_test_YnJpZWYtc3RhcmxpbmctMjYuY2xlcmsuYWNjb3VudHMuZGV2JA"
 
-  if (rootElement) {
-    const root = ReactDOM.createRoot(rootElement);
+if (!PUBLISHABLE_KEY) {
+  throw new Error('Missing Publishable Key')
+}
 
-    root.render(
-      <ErrorBoundary>
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <ErrorBoundary>
+      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </ErrorBoundary>
-    );
-  } else {
-    console.error("Root element not found!");
-  }
-});
+      </ClerkProvider>
+    </ErrorBoundary>
+  );
+} else {
+  console.error("Root element not found!");
+}
