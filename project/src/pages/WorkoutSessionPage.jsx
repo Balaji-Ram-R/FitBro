@@ -65,7 +65,6 @@ const WorkoutSessionPage = () => {
   const navigate = useNavigate();
   const [plan, setPlan] = useState(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [showPoseCorrection, setShowPoseCorrection] = useState(false);
 
   useEffect(() => {
     try {
@@ -166,7 +165,7 @@ const WorkoutSessionPage = () => {
             <h3 className="text-lg font-semibold text-gray-900 mb-4">🎥 Form Check</h3>
             <p className="text-gray-700 mb-4">Use AI-powered pose correction to check your form and ensure you're performing the exercise correctly.</p>
             <button
-              onClick={() => setShowPoseCorrection(true)}
+              onClick={() => navigate(`/pose-correction/${encodeURIComponent(currentExercise)}`)}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition"
             >
               Open Pose Correction
@@ -231,44 +230,6 @@ const WorkoutSessionPage = () => {
           </div>
         </div>
 
-        {/* Pose Correction Modal */}
-        {showPoseCorrection && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
-              <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">Pose Correction for {currentExercise}</h2>
-                <button
-                  onClick={() => setShowPoseCorrection(false)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto p-6 bg-gray-50">
-                <div className="bg-white rounded-lg p-6 h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-lg text-gray-700 mb-4">
-                      Use your camera to capture your exercise form in real-time. Position yourself in front of the camera so the AI can analyze your posture and provide feedback.
-                    </p>
-                    <div className="bg-gray-200 rounded-lg h-96 flex items-center justify-center">
-                      <p className="text-gray-500">Camera feed will appear here</p>
-                    </div>
-                    <p className="text-sm text-gray-600 mt-4">Ensure good lighting and clear visibility of your entire body for accurate analysis.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-t border-gray-200 p-6 flex items-center justify-between bg-white">
-                <p className="text-sm text-gray-600">Allow camera access for real-time pose feedback</p>
-                <button
-                  onClick={() => setShowPoseCorrection(false)}
-                  className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

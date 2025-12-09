@@ -9,6 +9,7 @@ import FitnessPlannerPage from './pages/FitnessPlannerPage';
 import WorkoutPlannerPage from './pages/WorkoutPlannerPage';
 import WorkoutSessionPage from './pages/WorkoutSessionPage';
 import MealPlannerPage from './pages/MealPlannerPage';
+import PoseCorrectionPage from './pages/PoseCorrectionPage';
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 // Lazy load components
@@ -111,6 +112,16 @@ export default function App() {
                 </SignedIn>
               } />
               <Route path="/workout-session/:planId" element={
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              } />
+              <Route path="/pose-correction/:exerciseName" element={
+                <SignedIn>
+                  <PoseCorrectionPage />
+                </SignedIn>
+              } />
+              <Route path="/pose-correction/:exerciseName" element={
                 <SignedOut>
                   <RedirectToSignIn />
                 </SignedOut>
